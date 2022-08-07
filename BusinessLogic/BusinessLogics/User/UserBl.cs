@@ -5,6 +5,7 @@ using DAL.DTO.User;
 using DAL.Model;
 using Data;
 using DAL.Model.CourseModels;
+using Serilog;
 
 namespace BusinessLogic.BusinessLogics.User
 {
@@ -17,7 +18,7 @@ namespace BusinessLogic.BusinessLogics.User
         private readonly ShamasiCalendar _shamasi;
         private readonly ICourseUserRepository _courseUser;
         private readonly ICourseRepository _course;
-
+        private readonly Serilog.ILogger _logger = Log.Logger;
         public UserBl(IUserRepository user, IBecomeMasterRepository master, Mapper mapper, HashPassword hash, ShamasiCalendar shamasi, ICourseUserRepository courseUser, ICourseRepository course)
         {
             _user = user;
@@ -39,6 +40,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /GetProfile success:false");
                 return err;
             }
 
@@ -50,6 +52,7 @@ namespace BusinessLogic.BusinessLogics.User
                 StatusCode = 200,
                 Success = true,
             };
+            _logger.Information("FinalProject : /GetProfile success:true");
             return sr;
 
         }
@@ -67,6 +70,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 400,
                     Success = false
                 };
+                _logger.Error("FinalProject : /GetCourses success:false");
                 return err;
 
             }
@@ -81,6 +85,7 @@ namespace BusinessLogic.BusinessLogics.User
                         StatusCode = 400,
                         Success = false
                     };
+                    _logger.Error("FinalProject : /GetCourses success:false");
                     return err;
                 }
             }
@@ -101,6 +106,7 @@ namespace BusinessLogic.BusinessLogics.User
                 StatusCode = 200,
                 Success = true,
             };
+            _logger.Information("FinalProject : /GetCourses success:true");
             return sr;
         }
 
@@ -118,6 +124,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /JoinCourse success:false");
                 return err;
             }
             if (course is null)
@@ -128,6 +135,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /JoinCourse success:false");
                 return err;
             }
 
@@ -153,6 +161,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 200,
                     Success = true
                 };
+                _logger.Information("FinalProject : /JoinCourse success:true");
                 return sr;
             }
 
@@ -162,6 +171,7 @@ namespace BusinessLogic.BusinessLogics.User
                 StatusCode = 404,
                 Success = false
             };
+            _logger.Error("FinalProject : /JoinCourse success:false");
             return er;
         }
 
@@ -177,6 +187,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateUser success:false");
                 return err;
             }
 
@@ -188,6 +199,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /UpdateUser success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.LastName))
@@ -198,6 +210,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /UpdateUser success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.Password))
@@ -208,6 +221,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /UpdateUser success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.RePassword))
@@ -218,6 +232,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /UpdateUser success:false");
                 return err;
             }
 
@@ -229,6 +244,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateUser success:false");
                 return err;
             }
 
@@ -251,7 +267,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 201,
                     Success = true
                 };
-
+                _logger.Information("FinalProject : /UpdateUser success:true");
                 return sr;
             }
 
@@ -261,7 +277,7 @@ namespace BusinessLogic.BusinessLogics.User
                 StatusCode = 404,
                 Success = false
             };
-
+            _logger.Error("FinalProject : /UpdateUser success:false");
             return er;
         }
 
@@ -276,6 +292,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /BecomeMaster success:false");
                 return err;
             }
 
@@ -287,6 +304,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /BecomeMaster success:false");
                 return err;
             }
             if (user.Role == UserModel.UserRole.TEACHER)
@@ -297,6 +315,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /BecomeMaster success:false");
                 return err;
             }
             var request = new BecomeMasterModel
@@ -320,6 +339,7 @@ namespace BusinessLogic.BusinessLogics.User
                     StatusCode = 201,
                     Success = true
                 };
+                _logger.Information("FinalProject : /BecomeMaster success:true");
                 return sr;
             }
             var er = new StandardResult
@@ -328,6 +348,7 @@ namespace BusinessLogic.BusinessLogics.User
                 StatusCode = 409,
                 Success = false
             };
+            _logger.Error("FinalProject : /BecomeMaster success:false");
             return er;
 
 

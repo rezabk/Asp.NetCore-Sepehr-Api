@@ -4,13 +4,14 @@ using DAL.DTO.Course;
 using DAL.Model;
 using DAL.Model.CourseModels;
 using Data;
+using Serilog;
 using Mapper = BusinessLogic.Utils.Mapper;
 
 namespace BusinessLogic.BusinessLogics.Course
 {
     public class CourseBl : ICourseBl
     {
-      
+
 
         private readonly Mapper _mapper;
         private readonly ShamasiCalendar _shamsi;
@@ -19,10 +20,10 @@ namespace BusinessLogic.BusinessLogics.Course
         private readonly IUserRepository _user;
         private readonly ICourseRepository _course;
         private ILessonRepository _lesson;
-
+        private readonly Serilog.ILogger _logger = Log.Logger;
         public CourseBl(ICourseRepository repo, Mapper mapper, ShamasiCalendar shamsi, ICourseUserRepository courseUser, IAdminRepository admin, IUserRepository user, ICourseRepository course, ILessonRepository lesson)
         {
-         
+
             _mapper = mapper;
             _shamsi = shamsi;
             _courseUser = courseUser;
@@ -42,6 +43,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 403,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /GetAllCourses success:false");
                 return err;
             }
 
@@ -64,7 +66,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     students.Add(studentDto);
                 }
 
-                
+
                 var tempDto = await _mapper.MapAsync(item, new ShowCoursesDto());
 
                 tempDto.TeacherDetails = teacherDto;
@@ -82,6 +84,7 @@ namespace BusinessLogic.BusinessLogics.Course
                 StatusCode = 200,
                 Success = true,
             };
+            _logger.Information("FinalProject : /GetAllCourses success:true");
             return sr;
 
         }
@@ -97,6 +100,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /GetCourseById success:false");
                 return er;
             }
 
@@ -128,6 +132,7 @@ namespace BusinessLogic.BusinessLogics.Course
                 StatusCode = 200,
                 Success = true,
             };
+            _logger.Information("FinalProject : /GetCourseById success:true");
             return sr;
 
 
@@ -146,6 +151,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return er;
             }
 
@@ -158,6 +164,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return err;
             }
 
@@ -169,6 +176,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return err;
             }
 
@@ -180,6 +188,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return err;
             }
 
@@ -191,6 +200,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return err;
             }
 
@@ -236,7 +246,7 @@ namespace BusinessLogic.BusinessLogics.Course
                 StatusCode = 201,
                 Success = true
             };
-
+            _logger.Information("FinalProject : /CreateCourse success:true");
             return sr;
         }
 
@@ -254,6 +264,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return er;
             }
 
@@ -265,6 +276,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return er;
             }
 
@@ -276,6 +288,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return err;
             }
 
@@ -287,6 +300,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return err;
             }
 
@@ -298,6 +312,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return err;
             }
 
@@ -321,6 +336,7 @@ namespace BusinessLogic.BusinessLogics.Course
                 StatusCode = 201,
                 Success = true
             };
+            _logger.Information("FinalProject : /UpdateCourse success:true");
             return sr;
 
         }
@@ -338,6 +354,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /RemoveCourse success:false");
                 return er;
             }
 
@@ -352,6 +369,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     StatusCode = 200,
                     Success = true,
                 };
+                _logger.Information("FinalProject : /RemoveCourse success:true");
                 return sr;
             }
 
@@ -361,6 +379,7 @@ namespace BusinessLogic.BusinessLogics.Course
                 StatusCode = 404,
                 Success = false
             };
+            _logger.Error("FinalProject : /RemoveCourse success:false");
             return err;
         }
 
@@ -377,6 +396,7 @@ namespace BusinessLogic.BusinessLogics.Course
                     Success = false
 
                 };
+                _logger.Error("FinalProject : /Availability success:false");
                 return err;
             }
             if (user.Role == UserModel.UserRole.TEACHER)
@@ -393,6 +413,7 @@ namespace BusinessLogic.BusinessLogics.Course
                             StatusCode = 201,
                             Success = true,
                         };
+                        _logger.Information("FinalProject : /Availability success:true");
                         return sr;
                     }
 
@@ -406,16 +427,11 @@ namespace BusinessLogic.BusinessLogics.Course
                             StatusCode = 201,
                             Success = true,
                         };
+                        _logger.Information("FinalProject : /Availability success:true");
                         return sr;
                     }
-
-
-
                 }
-
-
             }
-
             if (user.Role == UserModel.UserRole.ADMIN)
             {
                 if (course.IsActive)
@@ -428,6 +444,7 @@ namespace BusinessLogic.BusinessLogics.Course
                         StatusCode = 201,
                         Success = true,
                     };
+                    _logger.Information("FinalProject : /Availability success:true");
                     return sr;
                 }
 
@@ -441,6 +458,7 @@ namespace BusinessLogic.BusinessLogics.Course
                         StatusCode = 201,
                         Success = true,
                     };
+                    _logger.Information("FinalProject : /Availability success:true");
                     return sr;
                 }
             }
@@ -450,6 +468,7 @@ namespace BusinessLogic.BusinessLogics.Course
                 StatusCode = 404,
                 Success = false
             };
+            _logger.Error("FinalProject : /Availability success:true");
             return er;
 
         }

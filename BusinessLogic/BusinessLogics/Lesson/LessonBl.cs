@@ -5,6 +5,7 @@ using DAL.DTO.Lesson;
 using DAL.Model;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace BusinessLogic.BusinessLogics.Lesson
 {
@@ -15,7 +16,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
         private readonly ShamasiCalendar _shamasi;
         private readonly ILessonRepository _lesson;
         private readonly ICourseRepository _course;
-
+        private readonly Serilog.ILogger _logger = Log.Logger;
         public LessonBl(Mapper mapper, ShamasiCalendar shamasi, ILessonRepository lesson, ICourseRepository course)
         {
             _mapper = mapper;
@@ -73,6 +74,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /GetLessonById success:false");
                 return er;
             }
 
@@ -84,6 +86,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                 StatusCode = 200,
                 Success = true
             };
+            _logger.Information("FinalProject : /GetLessonById success:true");
             return sr;
 
         }
@@ -99,6 +102,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /CreateLesson success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.LessonTopics.ToString()))
@@ -109,6 +113,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /CreateLesson success:false");
                 return err;
             }
 
@@ -120,6 +125,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /CreateLesson success:false");
                 return err;
             }
 
@@ -142,6 +148,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 409,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateLesson success:false");
                 return err;
             }
 
@@ -155,6 +162,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                 StatusCode = 201,
                 Success = true,
             };
+            _logger.Information("FinalProject : /CreateLesson success:true");
             return sr;
 
         }
@@ -170,6 +178,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /UpdateLesson success:false");
                 return er;
             }
             if (string.IsNullOrWhiteSpace(dto.LessonName))
@@ -180,6 +189,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /UpdateLesson success:false");
                 return err;
             }
 
@@ -191,6 +201,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /UpdateLesson success:false");
                 return err;
             }
             if (dto.LessonTopics.Count == 0)
@@ -201,6 +212,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /UpdateLesson success:false");
                 return err;
             }
 
@@ -218,6 +230,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                 StatusCode = 201,
                 Success = true
             };
+            _logger.Information("FinalProject : /UpdateLesson success:true");
             return sr;
 
 
@@ -236,6 +249,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     Success = false
 
                 };
+                _logger.Error("FinalProject : /LessonAvailability success:false");
                 return err;
             }
 
@@ -249,6 +263,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 201,
                     Success = true,
                 };
+                _logger.Information("FinalProject : /LessonAvailability success:true");
                 return sr;
             }
 
@@ -262,6 +277,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 201,
                     Success = true,
                 };
+                _logger.Information("FinalProject : /LessonAvailability success:true");
                 return sr;
             }
         }
@@ -277,6 +293,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /RemoveLesson success:false");
                 return er;
             }
 
@@ -289,6 +306,7 @@ namespace BusinessLogic.BusinessLogics.Lesson
                 StatusCode = 201,
                 Success = true,
             };
+            _logger.Information("FinalProject : /RemoveLesson success:true");
             return sr;
 
         }

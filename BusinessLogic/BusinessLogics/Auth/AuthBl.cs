@@ -5,6 +5,7 @@ using DAL.DTO.Auth;
 using DAL.Model;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace BusinessLogic.BusinessLogics.Auth
 {
@@ -14,7 +15,7 @@ namespace BusinessLogic.BusinessLogics.Auth
         private readonly HashPassword _hash;
         private readonly IAuthRepository _auth;
         private readonly CreatePairToken _token;
-
+        private readonly Serilog.ILogger _logger = Log.Logger;
         public AuthBl(HashPassword hash, IAuthRepository auth, CreatePairToken token)
         {
             _hash = hash;
@@ -31,6 +32,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.LastName))
@@ -41,6 +43,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.Email))
@@ -51,6 +54,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.Password))
@@ -61,6 +65,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.RePassword))
@@ -71,6 +76,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.PhoneNumber))
@@ -81,6 +87,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
 
@@ -94,6 +101,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
             var checkPhoneNumberForRegister = await _auth.CheckPhoneNumberForRegister(dto.PhoneNumber);
@@ -105,6 +113,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
 
@@ -116,6 +125,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Register success:false");
                 return err;
             }
 
@@ -142,6 +152,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                 StatusCode = 201,
                 Success = true
             };
+            _logger.Information("FinalProject : /Register success:true");
             return sr;
         }
 
@@ -155,6 +166,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Login success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.Password))
@@ -165,6 +177,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Login success:false");
                 return err;
             }
 
@@ -179,6 +192,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /Login success:false");
                 return err;
             }
 
@@ -193,6 +207,7 @@ namespace BusinessLogic.BusinessLogics.Auth
                 StatusCode = 202,
                 Success = true,
             };
+            _logger.Information("FinalProject : /Login success:true");
             return sr;
         }
     }

@@ -57,7 +57,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 403,
                     Success = false,
                 };
-                _logger.Information("Class-ASP : /signin success:true");
+                _logger.Error("FinalProject : /GetAllUsers success:false");
                 return err;
             }
 
@@ -74,6 +74,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 200,
                 Success = true
             };
+            _logger.Information("FinalProject : /GetAllUsers success:true");
             return sr;
 
         }
@@ -90,7 +91,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-                _logger.Information("Class-ASP : /GetUserById success:false");
+                _logger.Error("FinalProject : /GetUserById success:false");
                 return er;
             }
 
@@ -102,6 +103,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 200,
                 Success = true
             };
+            _logger.Information("FinalProject : /GetUserById success:true");
             return sr;
 
         }
@@ -118,6 +120,7 @@ namespace BusinessLogic.BusinessLogics
                     Success = false
 
                 };
+                _logger.Error("FinalProject : /Availablity success:false");
                 return err;
             }
 
@@ -131,6 +134,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 201,
                     Success = true,
                 };
+                _logger.Error("FinalProject : /Availablity success:true");
                 return sr;
             }
 
@@ -144,6 +148,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 201,
                     Success = true,
                 };
+                _logger.Error("FinalProject : /Availablity success:true");
                 return sr;
             }
 
@@ -161,6 +166,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Warning("FinalProject : /GetAllBecomeMasterRequests success:false");
                 return er;
             }
 
@@ -179,6 +185,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 200,
                 Success = true,
             };
+            _logger.Information("FinalProject : /GetAllBecomeMasterRequests success:true");
             return sr;
         }
 
@@ -193,6 +200,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /GetBecomeMasterRequestById success:false");
                 return err;
             }
 
@@ -204,6 +212,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 200,
                 Success = true
             };
+            _logger.Information("FinalProject : /GetBecomeMasterRequestById success:true");
             return sr;
 
 
@@ -220,6 +229,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /ApproveMasterById success:false");
                 return err;
             }
 
@@ -234,6 +244,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Warning("FinalProject : /ApproveMasterById success:false");
                 return er;
             }
             if (user.Role == UserModel.UserRole.ADMIN)
@@ -244,6 +255,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Warning("FinalProject : /ApproveMasterById success:false");
                 return er;
             }
 
@@ -256,6 +268,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 201,
                 Success = true,
             };
+            _logger.Information("FinalProject : /ApproveMasterById success:true");
             return sr;
         }
 
@@ -321,6 +334,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 409,
                     Success = false
                 };
+                _logger.Error("FinalProject : /CheckCreateUser success:false");
                 return err;
             }
             if (await _context.Users.AnyAsync(x => x.PhoneNumber == dto.PhoneNumber))
@@ -331,6 +345,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 409,
                     Success = false
                 };
+                _logger.Error("FinalProject : /CheckCreateUser success:false");
                 return err;
             }
 
@@ -356,6 +371,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 201,
                 Success = true
             };
+            _logger.Information("FinalProject : /CheckCreateUser success:true");
             return sr;
 
 
@@ -373,6 +389,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /CheckUpdateUser success:false");
                 return er;
             }
 
@@ -384,6 +401,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Warning("FinalProject : /CheckUpdateUser success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.LastName))
@@ -394,6 +412,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Warning("FinalProject : /CheckUpdateUser success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.Password))
@@ -404,6 +423,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Warning("FinalProject : /CheckUpdateUser success:false");
                 return err;
             }
 
@@ -423,6 +443,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 409,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CheckUpdateUser success:false");
                 return err;
             }
 
@@ -435,7 +456,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 201,
                 Success = true
             };
-
+            _logger.Information("FinalProject : /CheckUpdateUser success:true");
             return sr;
         }
 
@@ -451,6 +472,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
+                _logger.Error("FinalProject : /CheckRemoveUser success:false");
                 return er;
             }
 
@@ -463,6 +485,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 200,
                 Success = true
             };
+            _logger.Information("FinalProject : /CheckRemoveUser success:true");
             return sr;
 
         }
@@ -478,6 +501,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return er;
             }
             var lesson = _lesson.GetLessonById(dto.LessonId);
@@ -489,6 +513,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return er;
             }
             if (lesson is null)
@@ -499,6 +524,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return er;
             }
             if (lesson.IsActive == false)
@@ -509,6 +535,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.CourseTitle))
@@ -519,6 +546,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return err;
             }
             if (dto.Capacity < 10)
@@ -529,6 +557,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /CreateCourse success:false");
                 return err;
             }
 
@@ -572,7 +601,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 201,
                 Success = true
             };
-
+            _logger.Information("FinalProject : /CreateCourse success:true");
             return sr;
 
         }
@@ -588,6 +617,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return er;
             }
             var course = _course.GetCourseById(courseid);
@@ -601,6 +631,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return er;
             }
             if (lesson is null)
@@ -611,6 +642,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return er;
             }
             if (lesson.IsActive == false)
@@ -621,6 +653,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return err;
             }
             if (string.IsNullOrWhiteSpace(dto.CourseTitle))
@@ -631,6 +664,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return err;
             }
             if (dto.Capacity < 10)
@@ -641,6 +675,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /UpdateCourse success:false");
                 return err;
             }
 
@@ -668,6 +703,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 201,
                 Success = true
             };
+            _logger.Information("FinalProject : /UpdateCourse success:true");
             return sr;
 
 
@@ -687,7 +723,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-
+                _logger.Error("FinalProject : /AddUserToCourse success:false");
                 return er;
             }
             if (user is null)
@@ -698,7 +734,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-
+                _logger.Error("FinalProject : /AddUserToCourse success:false");
                 return er;
             }
 
@@ -710,7 +746,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-
+                _logger.Error("FinalProject : /AddUserToCourse success:false");
                 return er;
             }
             if (user.Role == UserModel.UserRole.ADMIN)
@@ -721,7 +757,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-
+                _logger.Error("FinalProject : /AddUserToCourse success:false");
                 return er;
             }
 
@@ -745,6 +781,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 201,
                     Success = true,
                 };
+                _logger.Information("FinalProject : /AddUserToCourse success:true");
                 return sr;
             }
 
@@ -754,6 +791,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 404,
                 Success = false,
             };
+            _logger.Error("FinalProject : /AddUserToCourse success:false");
             return err;
 
         }
@@ -771,7 +809,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-
+                _logger.Error("FinalProject : /RemoveUserFromCourse success:false");
                 return er;
             }
             if (user is null)
@@ -782,7 +820,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-
+                _logger.Error("FinalProject : /RemoveUserFromCourse success:false");
                 return er;
             }
 
@@ -794,7 +832,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-
+                _logger.Error("FinalProject : /RemoveUserFromCourse success:false");
                 return er;
             }
             if (user.Role == UserModel.UserRole.ADMIN)
@@ -805,7 +843,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false
                 };
-
+                _logger.Error("FinalProject : /RemoveUserFromCourse success:false");
                 return er;
             }
 
@@ -818,6 +856,7 @@ namespace BusinessLogic.BusinessLogics
                     StatusCode = 404,
                     Success = false,
                 };
+                _logger.Error("FinalProject : /RemoveUserFromCourse success:false");
                 return er;
             }
 
@@ -825,13 +864,14 @@ namespace BusinessLogic.BusinessLogics
 
 
 
-            var err = new StandardResult
+            var sr = new StandardResult
             {
                 Messages = new List<string> { "کاربر از این دوره حذف شد" },
                 StatusCode = 200,
                 Success = true,
             };
-            return err;
+            _logger.Error("FinalProject : /RemoveUserFromCourse success:true");
+            return sr;
 
         }
 
@@ -846,6 +886,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 200,
                 Success = true,
             };
+            _logger.Information("FinalProject : /GetAllSettings success:true");
             return sr;
         }
 
@@ -867,6 +908,7 @@ namespace BusinessLogic.BusinessLogics
                 StatusCode = 200,
                 Success = true,
             };
+            _logger.Information("FinalProject : /UpdateSettings success:true");
             return sr;
 
 
