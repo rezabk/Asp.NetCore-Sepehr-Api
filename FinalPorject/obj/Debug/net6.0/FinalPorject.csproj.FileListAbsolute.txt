@@ -162,3 +162,9 @@ C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\De
 C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\Serilog.Sinks.File.dll
 C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\Serilog.Sinks.PeriodicBatching.dll
 C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\Serilog.Sinks.Seq.dll
+C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\Azure.Core.dll
+C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\Azure.Storage.Blobs.dll
+C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\Azure.Storage.Common.dll
+C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\System.IO.Hashing.dll
+C:\Users\Reza\Desktop\ASP.Net Core (Bahr)(Amin)\FinalPorject\FinalPorject\bin\Debug\net6.0\System.Memory.Data.dll

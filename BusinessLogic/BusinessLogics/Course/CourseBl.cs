@@ -1,9 +1,12 @@
 ﻿using BusinessLogic.Contracts;
 using BusinessLogic.Utils;
+using DAL;
 using DAL.DTO.Course;
 using DAL.Model;
 using DAL.Model.CourseModels;
 using Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Serilog;
 using Mapper = BusinessLogic.Utils.Mapper;
 
@@ -12,7 +15,8 @@ namespace BusinessLogic.BusinessLogics.Course
     public class CourseBl : ICourseBl
     {
 
-
+        private readonly AcademyDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly Mapper _mapper;
         private readonly ShamasiCalendar _shamsi;
         private readonly ICourseUserRepository _courseUser;
@@ -21,9 +25,11 @@ namespace BusinessLogic.BusinessLogics.Course
         private readonly ICourseRepository _course;
         private ILessonRepository _lesson;
         private readonly Serilog.ILogger _logger = Log.Logger;
-        public CourseBl(ICourseRepository repo, Mapper mapper, ShamasiCalendar shamsi, ICourseUserRepository courseUser, IAdminRepository admin, IUserRepository user, ICourseRepository course, ILessonRepository lesson)
-        {
 
+        public CourseBl(AcademyDbContext context, IWebHostEnvironment webHostEnvironment, Mapper mapper, ShamasiCalendar shamsi, ICourseUserRepository courseUser, IAdminRepository admin, IUserRepository user, ICourseRepository course, ILessonRepository lesson)
+        {
+            _context = context;
+            _webHostEnvironment = webHostEnvironment;
             _mapper = mapper;
             _shamsi = shamsi;
             _courseUser = courseUser;
@@ -92,6 +98,7 @@ namespace BusinessLogic.BusinessLogics.Course
         public async Task<StandardResult> GetCourseById(int courseId)
         {
             var course = _course.GetCourseById(courseId);
+
             if (course is null)
             {
                 var er = new StandardResult
@@ -247,6 +254,35 @@ namespace BusinessLogic.BusinessLogics.Course
                 Success = true
             };
             _logger.Information("FinalProject : /CreateCourse success:true");
+            return sr;
+        }
+
+        public async Task<StandardResult> UploadImageCourse(int courseId, IFormFile image)
+        {
+            var course = _course.GetCourseById(courseId);
+
+            if (image != null)
+            {
+                FileInfo fi = new FileInfo(image.FileName);
+                var newFileName = "Image_" + DateTime.Now.TimeOfDay.Milliseconds + fi.Extension;
+                var path = Path.Combine("", _webHostEnvironment.ContentRootPath + "\\Images\\" + newFileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    image.CopyTo(stream);
+                }
+
+                course.ImagePath = path;
+                course.ImageName = newFileName;
+                _course.Save();
+
+            }
+
+            var sr = new StandardResult
+            {
+                Messages = new List<string> { "Image Uploaded" },
+                StatusCode = 201,
+                Success = true,
+            };
             return sr;
         }
 

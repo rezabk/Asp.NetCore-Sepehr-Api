@@ -7,6 +7,7 @@ using DAL.DTO.Course;
 using DAL.Model;
 using DAL.Model.CourseModels;
 using Data;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessLogic.BusinessLogics.Course
 {
@@ -15,13 +16,15 @@ namespace BusinessLogic.BusinessLogics.Course
         Task<StandardResult> GetAllCourses();
         Task<StandardResult> GetCourseById(int courseId);
 
-        Task<StandardResult> CreateCourse(CreateCourseDto dto,int id);  
-        
-        Task<StandardResult> UpdateCourse(CreateCourseDto dto,int userId, int courseid); 
+        Task<StandardResult> CreateCourse(CreateCourseDto dto, int id);
+
+        Task<StandardResult> UploadImageCourse( int courseId,IFormFile image);
+
+        Task<StandardResult> UpdateCourse(CreateCourseDto dto, int userId, int courseid);
         Task<StandardResult> RemoveCourse(int userId, int courseid);
 
         Task<StandardResult> Availability(int courseId, int userId);
-    
+
 
 
 

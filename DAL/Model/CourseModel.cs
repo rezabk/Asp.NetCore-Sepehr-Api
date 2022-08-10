@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DAL.Model.CourseModels
 {
@@ -43,6 +44,11 @@ namespace DAL.Model.CourseModels
 
         [Required]
         public string CreationDate { get; set; }
+
+        [AllowNull]
+        public string? ImagePath { get; set; }
+        [AllowNull]
+        public string? ImageName { get; set; }
 
         [Required]
         public bool IsActive { get; set; }

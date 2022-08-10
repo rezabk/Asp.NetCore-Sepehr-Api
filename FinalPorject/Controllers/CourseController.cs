@@ -1,4 +1,6 @@
-﻿using BusinessLogic.BusinessLogics.Course;
+﻿using System.Runtime.CompilerServices;
+using BusinessLogic.BusinessLogics.Course;
+using BusinessLogic.Contracts;
 using DAL;
 using DAL.DTO.Course;
 using DAL.Model.CourseModels;
@@ -10,14 +12,19 @@ namespace FinalPorject.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-  
+
     public class CourseController : ControllerBase
     {
-        private readonly ICourseBl _bl;
 
-        public CourseController(ICourseBl bl, AcademyDbContext context)
+        private readonly ICourseRepository _course;
+        private readonly ICourseBl _bl;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public CourseController(ICourseRepository course, ICourseBl bl, IWebHostEnvironment webHostEnvironment)
         {
+            _course = course;
             _bl = bl;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [Authorize]
@@ -32,6 +39,7 @@ namespace FinalPorject.Controllers
         [HttpGet("{courseId}")]
         public async Task<IActionResult> GetById(int courseId)
         {
+
             var res = await _bl.GetCourseById(courseId);
             return StatusCode(res.StatusCode, res);
         }
@@ -44,8 +52,33 @@ namespace FinalPorject.Controllers
             var userId = int.Parse(HttpContext.User.Identity.Name);
             var res = await _bl.CreateCourse(dto, userId);
             return StatusCode(res.StatusCode, res);
+        }
+
+        [HttpPost("[action]")]
+
+        public async Task<IActionResult> UploadCourseImage(int courseId, IFormFile image)
+        {
+            var res = await _bl.UploadImageCourse(courseId, image);
+            return StatusCode(res.StatusCode, res);
+        }
+
+        [HttpGet("{courseId}")]
+        public async Task<IActionResult?> GetCourseImage(int courseId)
+        {
+            var image = _course.GetCourseById(courseId);
+
+            string path = _webHostEnvironment.ContentRootPath + "\\Images\\";
+
+            var filePath = path + image.ImageName;
+            if (System.IO.File.Exists(filePath))
+            {
+                byte[] b = System.IO.File.ReadAllBytes(filePath);
+                return File(b, "image/png");
+            }
+            return BadRequest();
 
         }
+
 
         [Authorize(Roles = "TEACHER")]
         [HttpPatch("{courseid}")]
